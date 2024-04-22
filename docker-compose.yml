@@ -1,0 +1,12 @@
+services:
+  almond-notebook:
+    image: almondsh/almond
+    container_name: scala-jupyter-container2
+    ports:
+      - "$NOTEBOOK_PORT:8888"
+    volumes:
+      - ./:${PROJECT_DIR}
+    command: >
+        /bin/sh -c "start-notebook.py --NotebookApp.token=${NOTEBOOK_TOKEN} --notebook-dir=${NOTEBOOK_DIR}"
+    working_dir: ${PROJECT_DIR}
+    user: root

@@ -1,0 +1,13 @@
+#!/bin/bash
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/../.env"
+
+
+export GTK_MODULES=${GTK_MODULES/:atk-bridge/}
+
+docker compose up -d
+
+# let the docker container start before opening lab
+sleep 2
+
+xdg-open http://localhost:$NOTEBOOK_PORT/?token=$NOTEBOOK_TOKEN
